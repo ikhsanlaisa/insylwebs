@@ -17,7 +17,7 @@ class ApiUsersController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        $user = Auth::user('tb_kelas');
         return response()->json($user);
     }
 
@@ -46,6 +46,9 @@ class ApiUsersController extends Controller
             $user->alamat = $request->input('alamat');
 
         }
+        if ($request->input('password')){
+            $user->password = bcrypt($request->input('password'));
+        }
         if ($request->input('kelas_id')) {
             $user->kelas_id = $request->input('kelas_id');
         }
@@ -60,26 +63,5 @@ class ApiUsersController extends Controller
         return $this->baseResponse(true, "berhasil", $user);
     }
 
-    public function regis(Request $request)
-    {
-        $regis = new registrasi();
-        $regis->profil_id = Auth::user();
-        $regis->olahraga_id = $request->input('olahraga_id');
-        $result = $regis->save();
-        if ($result) {
-            return response()->json(
-                [
-                    'error' => false,
-                    'message' => 'berhasil disimpan'
-                ]
-            );
-        } else {
-            return response()->json(
-                [
-                    'error' => true,
-                    'message' => 'gagal disimpan'
-                ]
-            );
-        }
-    }
+
 }

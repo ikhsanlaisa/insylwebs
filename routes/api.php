@@ -23,7 +23,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/news', 'ApiNewsController@news');
     Route::get('/kelas', 'ApiKelasController@kelas');
     Route::get('/jadwal', 'ApiJadwalController@jadwal');
+    Route::get('/cabor', 'ApiCaborController@cabor');
     Route::get('/detailnews', 'ApiNewsController@show');
-    Route::post('/regis', 'ApiScoreController@regis');
+    Route::post('/regis', 'ApiDaftarController@regis');
     Route::post('/updateuser', 'ApiUsersController@update');
 });
