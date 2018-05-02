@@ -35,24 +35,24 @@ class ApiUsersController extends Controller
             $user->email = $request->input('email');
 
         }
-//        if ($request->input('tgl_lahir')) {
+        if ($request->input('tgl_lahir')) {
             $user->tgl_lahir = $request->input('tgl_lahir');
 
-//        }
-//        if ($request->input('no_hp')) {
+        }
+        if ($request->input('no_hp')) {
             $user->no_hp = $request->input('no_hp');
 
-//        }
-//        if ($request->input('alamat')) {
+        }
+        if ($request->input('alamat')) {
             $user->alamat = $request->input('alamat');
 
-//        }
+        }
         if ($request->input('password')){
             $user->password = bcrypt($request->input('password'));
         }
-//        if ($request->input('kelas_id')) {
+        if ($request->input('kelas_id')) {
             $user->kelas_id = $request->input('kelas_id');
-//        }
+        }
         if ($request->file('foto')) {
             $foto = $request->file('foto');
             $fotos = $foto->getClientOriginalName();
