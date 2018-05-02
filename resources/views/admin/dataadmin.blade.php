@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title">Data Admin</strong>
                         </div>
                         @if(Session::has('message'))
                             <div class="alert alert-success">

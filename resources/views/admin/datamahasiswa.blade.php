@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title">Data User</strong>
                         </div>
                         @if(!empty($user))
                             <div class="card-body">

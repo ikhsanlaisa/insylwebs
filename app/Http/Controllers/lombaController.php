@@ -85,8 +85,15 @@ class lombaController extends Controller
     public function update(Request $request, $id)
     {
         $lomba = cb_olahraga::find($id);
-        $lomba->cabang_olahraga = $request->input('lomba');
+        if ($request->input('lomba') && $request->input('pj')){
+            return redirect('/data_lomba')->with(['message' => 'Tidak melakukan perubahan']);
+        }
+        if ($request->input('lomba')){
+            $lomba->cabang_olahraga = $request->input('lomba');
+        }
+        if ($request->input('pj')){
         $lomba->pj = $request->input('pj');
+        }
         $result = $lomba->save();
         if ($result){
             return redirect('/data_lomba')->with(['message' => 'Berhasil Update Lomba']);

@@ -17,14 +17,14 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Nama Lomba</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="lomba" name="lomba"
-                                                            placeholder="Nama Lomba" class="form-control">
+                                                            placeholder="Nama Lomba" class="form-control" required>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Penangnggung Jawab</label>
                         </div>
                         <div class="col-6 col-md-6"><input type="text" id="pj" name="pj"
-                                                           placeholder="Penanggung Jawab" class="form-control">
+                                                           placeholder="Penanggung Jawab" class="form-control" required>
                         </div>
                     </div>
 

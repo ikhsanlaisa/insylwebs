@@ -17,6 +17,7 @@ class CreateNewsTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->string('description');
+            $table->string('foto');
             $table->timestamps();
         });
     }

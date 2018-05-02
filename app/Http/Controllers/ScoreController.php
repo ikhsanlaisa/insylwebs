@@ -72,9 +72,9 @@ class ScoreController extends Controller
         $sc->keterangan = $request->input('keterangan');
         $result = $sc->save();
         if ($result){
-            return redirect('/tambah_score')->with(['message' => 'Berhasil Hapus Score']);
+            return redirect('/datascore')->with(['message' => 'Berhasil update Score']);
         }else{
-            return redirect('/tambah_score')->with(['message' => 'Gagal Hapus Score']);
+            return redirect('/datascore')->with(['message' => 'Gagal update Score']);
         }
     }
 

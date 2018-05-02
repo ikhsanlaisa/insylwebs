@@ -17,7 +17,7 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Nama Kelas</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="kelas" name="kelas"
-                                                           placeholder="Nama Kelas" class="form-control">
+                                                           placeholder="Nama Kelas" class="form-control" required>
                         </div>
                     </div>
                     <div class="row form-group">

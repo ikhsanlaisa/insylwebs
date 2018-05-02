@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class ApiRegisterController extends Controller
 {
@@ -109,6 +110,19 @@ class ApiRegisterController extends Controller
         }
 
         // all good so return the token
+        return response()->json(['success' => true, 'data' => ['token' => $token]]);
+    }
+
+    public function refreshtoken(){
+        $token = JWTAuth::getToken();
+        if(!$token){
+            return response()->json(['success'=>false, 'error'=>'Token not provided']);
+        }
+        try{
+            $token = JWTAuth::refresh($token);
+        }catch(TokenInvalidException $e){
+            return response()->json(['success'=>false, 'error'=>'The token is invalid']);
+        }
         return response()->json(['success' => true, 'data' => ['token' => $token]]);
     }
 }

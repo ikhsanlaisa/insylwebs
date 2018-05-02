@@ -9,6 +9,10 @@ class tb_kelas extends Model
     protected $table = 'tb_kelas';
     protected $fillable = array('nama_kelas', 'foto', 'point');
 
+    public function user(){
+        return $this->hasMany('App\User', 'kelas_id');
+    }
+
     public function tb_jadwal(){
         return $this->hasMany('App\tb_jadwal', 'tim1');
     }

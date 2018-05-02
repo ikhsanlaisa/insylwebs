@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     Route::post('/register', 'ApiRegisterController@register');
     Route::post('/login', 'ApiRegisterController@login');
+    Route::post('/refreshtoken', 'ApiRegisterController@refreshtoken');
     Route::post('/recover', 'ApiLoginController@recover');
     Route::get('/score', 'ApiScoreController@score');
     Route::get('/kontak', 'ApiKontakController@kontak');

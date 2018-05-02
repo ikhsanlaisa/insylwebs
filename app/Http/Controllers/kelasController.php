@@ -12,6 +12,7 @@ class kelasController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,45 +37,44 @@ class kelasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $filepath = 'images/kelas/';
 
-        $class = $request->file('foto');
-        $klass = $class->getClientOriginalName();
-        $class->move($filepath, $klass);
-
         $clas = Input::get('kelas');
         $cek = tb_kelas::where('nama_kelas', '=', $clas)->exists();
-        if ($cek){
+        if ($cek) {
             return redirect('/tambah_kelas')->with(['message' => 'Kelas Sudah Ada']);
-        }else{
+        } else {
             $klas = new tb_kelas();
             $klas->nama_kelas = $request->input('kelas');
-            if ($klass == null || $klass != null){
-                if ($f = $klass){
-                    $klas->foto = $f;
-                }
+            if ($request->file('foto')) {
+                $class = $request->file('foto');
+                $klass = $class->getClientOriginalName();
+                $class->move($filepath, $klass);
+                $klas->foto = $klass;
             }
-
-            $result = $klas->save();
-            if ($result) {
-                return redirect('/tambah_kelas')->with(['message' => 'Berhasil Tambah Kelas']);
-            }
-            return redirect('/tambah_kelas')->with(['message' => 'Gagal Tambah Kelas']);
         }
+
+        $result = $klas->save();
+        if ($result) {
+            return redirect('/tambah_kelas')->with(['message' => 'Berhasil Tambah Kelas']);
+        }
+        return redirect('/tambah_kelas')->with(['message' => 'Gagal Tambah Kelas']);
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         $kelas = tb_kelas::find($id);
         return json_encode($kelas);
@@ -83,10 +83,11 @@ class kelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -94,24 +95,26 @@ class kelasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $kelas = tb_kelas::find($id);
-
         $filepath = 'images/kelas';
-        if ($request->input('foto')) {
-            $foto = $request->input('foto');
+        if ($request->file('foto')) {
+            $foto = $request->file('foto');
 
             $fotos = $foto->getClientOriginalName();
             $foto->move($filepath, $fotos);
 
             $kelas->foto = $fotos;
         }
+        if ($request->input('kelas')){
         $kelas->nama_kelas = $request->input('kelas');
+        }
         $result = $kelas->save();
 
         if ($result) {
@@ -123,14 +126,15 @@ class kelasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $kelas = tb_kelas::find($id);
         $result = $kelas->delete();
-        if ($result){
+        if ($result) {
             return redirect('/datakelas')->with(['message' => 'Berhasil Hapus Kelas']);
         }
         return redirect('/datakelas')->with(['message' => 'Gagal Hapus Kelas']);

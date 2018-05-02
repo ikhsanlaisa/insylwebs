@@ -28,6 +28,10 @@ class User extends Authenticatable
     ];
 
     public function tb_kelas(){
-        return $this->belongsTo('App\User', 'kelas_id');
+        return $this->belongsTo('App\tb_kelas', 'kelas_id');
+    }
+
+    public function profil(){
+        return $this->hasMany('App\registrasi', 'profil_id');
     }
 }

@@ -4,7 +4,7 @@
     <div class="col-lg-10 centered">
         <div class="card">
             <div class="card-header">
-                <strong>Tambah</strong> Score
+                <strong>Tambah</strong> News
             </div>
             @if(Session::has('message'))
                 <div class="alert alert-success">

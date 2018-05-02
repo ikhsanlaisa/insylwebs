@@ -10,6 +10,6 @@ class ApiJadwalController extends Controller
 {
     public function jadwal(){
         $jadwal = tb_jadwal::with('kelas', 'kelas1', 'cb_olahraga')->get();
-        return response()->json($jadwal);
+        return $jadwal;
     }
 }
