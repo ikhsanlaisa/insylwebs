@@ -17,14 +17,17 @@ class CreateTbPertandingansTable extends Migration
             $table->increments('id');
             $table->integer('jadwal_id')->unsigned();
             $table->string('keterangan');
-            $table->string('tim1');
-            $table->string('tim2');
-            $table->string('cabor');
+            $table->integer('tim1')->unsigned();
+            $table->integer('tim2')->unsigned();
+            $table->integer('cabor')->unsigned();
             $table->string('score');
             $table->string('lokasi');
             $table->timestamps();
 
             $table->foreign('jadwal_id')->references('id')->on('tb_jadwals')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tim1')->references('id')->on('tb_kelas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tim2')->references('id')->on('tb_kelas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('cabor')->references('id')->on('cb_olahragas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

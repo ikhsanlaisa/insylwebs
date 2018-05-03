@@ -34,23 +34,44 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text" class=" form-control-label">Cabang Olahraga</label></div>
-                        <div class="col-6 col-md-6"><input type="text" id="cabor" name="cabor"
-                                                           placeholder="Nama Tim" class="form-control">
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Cabang Olahraga</label>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <input type="text" id="cabor" name="cabor"
+                                                           placeholder="Nama Cabor" class="form-control" disabled>
+                            <input type="text" id="caborid" name="caborid"
+                                                           placeholder="Nama Cabor" class="form-control" hidden>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Tim 1</label></div>
-                        <div class="col-6 col-md-6"><input type="text" id="tim1" name="tim1"
-                                                           placeholder="Nama Tim" class="form-control">
+                        <div class="col-6 col-md-6">
+                            <input type="text" id="tim1" name="tim1"
+                                                           placeholder="Nama Tim" class="form-control" disabled>
+                            <input type="text" id="tim1id" name="tim1id"
+                                                           placeholder="Nama Tim" class="form-control" hidden>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Tim 2</label></div>
-                        <div class="col-6 col-md-6"><input type="text" id="tim2" name="tim2"
-                                                           placeholder="Nama Tim" class="form-control">
+                        <div class="col-6 col-md-6">
+                            <input type="text" id="tim2" name="tim2"
+                                                           placeholder="Nama Tim" class="form-control" disabled>
+                            <input type="text" id="tim2id" name="tim2id"
+                                                           placeholder="Nama Tim" class="form-control" hidden>
                         </div>
                     </div>
+                    {{--<div class="row form-group">--}}
+                        {{--<div class="col col-md-3"><label for="text" class=" form-control-label">Tim yang menang </label></div>--}}
+                        {{--<div class="col-6 col-md-6">--}}
+                            {{--<select class="form-control" id="jadwal" name="jadwal" required>--}}
+                                {{--<option selected disabled>-Pilih Jadwal-</option>--}}
+                                {{--@foreach($kelas as $k)--}}
+                                    {{--<option value="{{$k->id}}">{{$k->nama_kelas}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Score</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="score" name="score"
@@ -59,8 +80,11 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Lokasi</label></div>
-                        <div class="col-6 col-md-6"><input type="text" id="lokasi" name="lokasi"
-                                                           placeholder="Lokasi" class="form-control">
+                        <div class="col-6 col-md-6">
+                            <input type="text" id="lokasi" name="lokasi"
+                                                           placeholder="Lokasi" class="form-control" disabled>
+                            <input type="text" id="lokasis" name="lokasis"
+                                                           placeholder="Lokasi" class="form-control" hidden>
                         </div>
                     </div>
 
@@ -91,9 +115,13 @@
             console.log(e);
             var a = e.target.value;
             cabor = document.getElementById('cabor');
+            caborid = document.getElementById('caborid');
             tim1 = document.getElementById('tim1');
+            tim1id = document.getElementById('tim1id');
             tim2 = document.getElementById('tim2');
+            tim2id = document.getElementById('tim2id');
             lokasi = document.getElementById('lokasi');
+            lokasis = document.getElementById('lokasis');
             $.get('/detaildatajadwal/' + a, function (data) {
 //
                 $.ajax({
@@ -107,10 +135,14 @@
                             console.log('datanya 2 = ' + returnJSON.id);
 //                            keterangan.value = jad.keterangan;
                             cabor.value = returnJSON.cabor.cabang_olahraga;
+                            caborid.value = returnJSON.cabor.id;
                             tim1.value = returnJSON.tim1.nama_kelas;
+                            tim1id.value = returnJSON.tim1.id;
                             tim2.value = returnJSON.tim2.nama_kelas;
+                            tim2id.value = returnJSON.tim2.id;
 //                            score.value = jad.score;
                             lokasi.value = returnJSON.jadwal.lokasi;
+                            lokasis.value = returnJSON.jadwal.lokasi;
 
                         } else {
                             console.log('null')

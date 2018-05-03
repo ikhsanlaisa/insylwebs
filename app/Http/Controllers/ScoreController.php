@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\tb_jadwal;
+use App\tb_kelas;
 use App\tb_pertandingan;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class ScoreController extends Controller
 
     public function create(){
         $jadwal = tb_jadwal::all();
-        return view("admin.tambah_score")->with('jadwal', $jadwal);
+        $kelas = tb_kelas::all();
+        return view("admin.tambah_score")->with(['jadwal'=> $jadwal, 'kelas'=>$kelas]);
     }
 
     public function show($id){
@@ -28,7 +30,6 @@ class ScoreController extends Controller
         $tim1 = $jad->kelas()->first();
         $tim2 = $jad->kelas1()->first();
         $cabor = $jad->cb_olahraga()->first();
-
         $returnJSON = [
             "jadwal"=>$jad,
             "tim1"=>$tim1,
@@ -42,11 +43,11 @@ class ScoreController extends Controller
     public function store(Request $request){
         $score = new tb_pertandingan();
         $score->jadwal_id = $request->input('jadwal');
-        $score->cabor = $request->input('cabor');
-        $score->tim1 = $request->input('tim1');
-        $score->tim2 = $request->input('tim2');
+        $score->cabor = $request->input('caborid');
+        $score->tim1 = $request->input('tim1id');
+        $score->tim2 = $request->input('tim2id');
         $score->keterangan = $request->input('keterangan');
-        $score->lokasi = $request->input('lokasi');
+        $score->lokasi = $request->input('lokasis');
         $score->score = $request->input('score');
         $result = $score->save();
         if ($result){
@@ -54,6 +55,8 @@ class ScoreController extends Controller
         }else{
             return redirect('/tambah_score')->with(['message' => 'Gagal Tambah Score']);
         }
+
+
     }
 
     public function shows($id){

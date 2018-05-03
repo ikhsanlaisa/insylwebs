@@ -17,7 +17,7 @@ class CreateRegistrasisTable extends Migration
             $table->increments('id');
             $table->integer('profil_id')->unsigned();
             $table->integer('olahraga_id')->unsigned();
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->timestamps();
 
             $table->foreign('profil_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
