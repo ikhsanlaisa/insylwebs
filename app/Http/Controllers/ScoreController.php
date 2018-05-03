@@ -30,11 +30,16 @@ class ScoreController extends Controller
         $tim1 = $jad->kelas()->first();
         $tim2 = $jad->kelas1()->first();
         $cabor = $jad->cb_olahraga()->first();
+        $all = [
+          "tim1"=>$tim1,
+          "tim2"=>$tim2
+        ];
         $returnJSON = [
             "jadwal"=>$jad,
             "tim1"=>$tim1,
             "tim2"=>$tim2,
-            "cabor"=>$cabor
+            "cabor"=>$cabor,
+            "all"=>$all
         ];
 
         return json_encode($returnJSON);
@@ -49,13 +54,17 @@ class ScoreController extends Controller
         $score->keterangan = $request->input('keterangan');
         $score->lokasi = $request->input('lokasis');
         $score->score = $request->input('score');
-        $result = $score->save();
-        if ($result){
+        $result1 = $score->save();
+
+        $id = $request->input('win');
+        $kelas = tb_kelas::find($id);
+        $kelas->point = $kelas->point+3;
+        $result2 = $kelas->save();
+        if ($result1 && $result2){
             return redirect('/tambah_score')->with(['message' => 'Berhasil Tambah Score']);
         }else{
             return redirect('/tambah_score')->with(['message' => 'Gagal Tambah Score']);
         }
-
 
     }
 

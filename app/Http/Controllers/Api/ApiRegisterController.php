@@ -19,7 +19,7 @@ class ApiRegisterController extends Controller
 {
     public function register(Request $request)
     {
-        $credentials = $request->only('nama', 'email', 'password', 'roles');
+        $credentials = $request->only('nama', 'email', 'password', 'kelas_id', 'roles');
 
         $rules = [
             'nama' => 'required|max:255',
@@ -32,9 +32,10 @@ class ApiRegisterController extends Controller
         $name = $request->nama;
         $email = $request->email;
         $password = $request->password;
+        $kelas = $request->kelas_id;
         $roles = $request->roles = 2;
 
-        $user = User::create(['nama' => $name, 'email' => $email, 'roles' => $roles, 'password' => Hash::make($password)]);
+        $user = User::create(['nama' => $name, 'email' => $email, 'kelas_id' => $kelas, 'roles' => $roles, 'password' => Hash::make($password)]);
 //        $verification_code = str_random(30); //Generate verification code
 //        DB::table('user_verifications')->insert(['user_id' => $user->id, 'token' => $verification_code]);
 //        $subject = "Please verify your email address.";

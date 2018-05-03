@@ -61,17 +61,16 @@
                                                            placeholder="Nama Tim" class="form-control" hidden>
                         </div>
                     </div>
-                    {{--<div class="row form-group">--}}
-                        {{--<div class="col col-md-3"><label for="text" class=" form-control-label">Tim yang menang </label></div>--}}
-                        {{--<div class="col-6 col-md-6">--}}
-                            {{--<select class="form-control" id="jadwal" name="jadwal" required>--}}
-                                {{--<option selected disabled>-Pilih Jadwal-</option>--}}
-                                {{--@foreach($kelas as $k)--}}
-                                    {{--<option value="{{$k->id}}">{{$k->nama_kelas}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text" class=" form-control-label">Tim yang menang </label></div>
+                        <div class="col-6 col-md-6">
+                            <select class="form-control" id="win" name="win" required>
+                                <option selected disabled>-Pilih Jadwal-</option>
+                                <option id="opt_win1"></option>
+                                <option id="opt_win2"></option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text" class=" form-control-label">Score</label></div>
                         <div class="col-6 col-md-6"><input type="text" id="score" name="score"
@@ -122,6 +121,9 @@
             tim2id = document.getElementById('tim2id');
             lokasi = document.getElementById('lokasi');
             lokasis = document.getElementById('lokasis');
+            win = document.getElementById('win');
+            opt_win1 = document.getElementById('opt_win1');
+            opt_win2 = document.getElementById('opt_win2');
             $.get('/detaildatajadwal/' + a, function (data) {
 //
                 $.ajax({
@@ -133,7 +135,6 @@
                         if (returnJSON !== null) {
                             console.log('data = ' + returnJSON);
                             console.log('datanya 2 = ' + returnJSON.id);
-//                            keterangan.value = jad.keterangan;
                             cabor.value = returnJSON.cabor.cabang_olahraga;
                             caborid.value = returnJSON.cabor.id;
                             tim1.value = returnJSON.tim1.nama_kelas;
@@ -143,7 +144,11 @@
 //                            score.value = jad.score;
                             lokasi.value = returnJSON.jadwal.lokasi;
                             lokasis.value = returnJSON.jadwal.lokasi;
-
+                            win.value = returnJSON.all;
+                            opt_win1.value = returnJSON.all.tim1.id;
+                            opt_win2.value = returnJSON.all.tim2.id;
+                            opt_win1.textContent = returnJSON.all.tim1.nama_kelas;
+                            opt_win2.textContent = returnJSON.all.tim2.nama_kelas;
                         } else {
                             console.log('null')
                             keterangan.value = "";
